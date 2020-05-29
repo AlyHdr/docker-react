@@ -1,0 +1,12 @@
+language: generic 
+sudo: required
+# require docker on travisCI
+services: 
+    - docker
+# tell travis to build the image before installation
+before_install:
+    - docker build -t alyhdr/docker-react -f Dockerfile.dev .
+
+# tell travis how to run our tests
+script:
+    - docker run -e CI=true alyhdr/docker-react npm run test
